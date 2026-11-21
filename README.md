@@ -20,10 +20,7 @@ Everything runs on your own computer, bound to `localhost`, with federation turn
    - `ANTHROPIC_API_KEY`: direct. The key stays in `.env` on your computer.
    - `CONSTRUCT_PROXY_URL`: through a CCN Cloud proxy, so the key stays in Wolfram Cloud, as with TUTUKernel and MAXITKernel. The proxy receives an Anthropic Messages API request body. It returns either the Messages API response or `{"reply": "..."}`.
    - Neither: **echo mode**. The bot repeats what you say, which tests that everything is connected.
-2. **Start it.** In `sandbox/`, run:
-   ```
-   docker compose up -d --build
-   ```
+2. **Start it.** On a Mac, double-click `start-sandbox.command`. It starts Docker Desktop if needed, opens the chat app and shows your username and registration token. Anywhere else, run `docker compose up -d --build` in `sandbox/`. To stop it, double-click `stop-sandbox.command` or run `docker compose down`.
 3. **Register.** Open <http://localhost:8080> and choose *Create account*. Use the username from `SANDBOX_INVITE` (for example `lucval`) and enter the registration token when asked.
 4. **Chat.** Within about 15 seconds you'll get an invite to **CCN Sandbox** from *Claude (CCN sandbox · automated)*. Accept it and say hello.
 
