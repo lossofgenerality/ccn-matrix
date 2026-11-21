@@ -1,0 +1,16 @@
+{
+  "name": "ccn-matrix-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CCN conversational-construct bot for Matrix (sandbox: chat with Claude in a Matrix room)",
+  "type": "module",
+  "main": "src/index.mjs",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/index.mjs",
+    "check": "node --check src/index.mjs && node --check src/claude.mjs && node --check src/account.mjs && node src/selftest.mjs"
+  },
+  "dependencies": {
+    "matrix-js-sdk": "45.1.0"
+  }
+}

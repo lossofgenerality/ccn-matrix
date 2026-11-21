@@ -1,0 +1,10 @@
+{
+  "name": "ccn-matrix-widgets",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Stage 4: CCN pages (CARTELS! comic, Laplacian Lab, MAXIT) as Matrix room widgets",
+  "type": "module",
+  "dependencies": {
+    "matrix-widget-api": "1.20.0"
+  }
+}
