@@ -51,6 +51,7 @@ services:
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       CONSTRUCT_PROXY_URL: ${CONSTRUCT_PROXY_URL:-}
       CLAUDE_MODEL: ${CLAUDE_MODEL:-claude-sonnet-5-5}
+      CLAUDE_MAX_TOKENS: ${CLAUDE_MAX_TOKENS:-4096}
       BOT_DISPLAY_NAME: ${BOT_DISPLAY_NAME:-Claude (CCN sandbox · automated)}
       SYSTEM_PROMPT_FILE: /app/prompts/briefing.md   # optional; edits apply on the next reply
     volumes:

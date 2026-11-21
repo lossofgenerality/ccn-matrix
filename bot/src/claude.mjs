@@ -64,7 +64,7 @@ export async function reply(history, env = process.env) {
 
   const body = {
     model: env.CLAUDE_MODEL || "claude-sonnet-5-5",
-    max_tokens: Number(env.CLAUDE_MAX_TOKENS || 1024),
+    max_tokens: Number(env.CLAUDE_MAX_TOKENS || 4096),
     system: systemPrompt(env),
     messages,
   };
@@ -84,10 +84,12 @@ export async function reply(history, env = process.env) {
   }
   // Accept a Messages API response, or a proxy that returns {reply: "..."}.
   if (typeof json.reply === "string") return json.reply;
-  const text = (json.content || [])
+  let text = (json.content || [])
     .filter((b) => b.type === "text")
     .map((b) => b.text)
     .join("\n")
     .trim();
+  // Say so when a reply was cut off by the length limit, instead of stopping mid-word.
+  if (text && json.stop_reason === "max_tokens") text += " … (reply cut off at the length limit; ask me to continue)";
   return text || null;
 }
