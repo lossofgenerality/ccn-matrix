@@ -7,7 +7,27 @@
 //   (neither)            -> echo mode, for testing the plumbing only
 // © Computational Classnotes · CC BY-NC-SA 4.0
 
+import { readFileSync } from "node:fs";
+
 const API_URL = "https://api.anthropic.com/v1/messages";
+
+const DEFAULT_PROMPT =
+  "You are Claude, taking part in a Computational Classnotes (CCN) Matrix test room as a clearly labelled automated account. " +
+  "Messages from people are prefixed with their name. Reply conversationally and concisely in plain text.";
+
+// System prompt: SYSTEM_PROMPT_FILE (a briefing file, re-read on every reply so
+// edits apply without a restart) > SYSTEM_PROMPT > built-in default.
+export function systemPrompt(env = process.env) {
+  if (env.SYSTEM_PROMPT_FILE) {
+    try {
+      const text = readFileSync(env.SYSTEM_PROMPT_FILE, "utf8").trim();
+      if (text) return text;
+    } catch {
+      /* missing file: fall through */
+    }
+  }
+  return env.SYSTEM_PROMPT || DEFAULT_PROMPT;
+}
 
 export function mode(env = process.env) {
   if (env.CONSTRUCT_PROXY_URL) return "proxy";
@@ -45,10 +65,7 @@ export async function reply(history, env = process.env) {
   const body = {
     model: env.CLAUDE_MODEL || "claude-sonnet-5-5",
     max_tokens: Number(env.CLAUDE_MAX_TOKENS || 1024),
-    system:
-      env.SYSTEM_PROMPT ||
-      "You are Claude, taking part in a Computational Classnotes (CCN) Matrix test room as a clearly labelled automated account. " +
-        "Messages from people are prefixed with their name. Reply conversationally and concisely in plain text.",
+    system: systemPrompt(env),
     messages,
   };
 

@@ -5,7 +5,10 @@
 import http from "node:http";
 import assert from "node:assert/strict";
 import { loginOrRegister, waitForHomeserver } from "./account.mjs";
-import { toMessages, reply, mode } from "./claude.mjs";
+import { toMessages, reply, mode, systemPrompt } from "./claude.mjs";
+import { writeFileSync, mkdtempSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 
 const seen = [];
 const server = http.createServer(async (req, res) => {
@@ -64,6 +67,12 @@ assert.equal(mode({}), "echo");
 assert.match(await reply(history, {}), /echo mode.*Test passed\?/);
 assert.equal(mode({ CONSTRUCT_PROXY_URL: "x", ANTHROPIC_API_KEY: "y" }), "proxy");
 assert.equal(await reply(history, { CONSTRUCT_PROXY_URL: `${base}/proxy` }), "proxy got 3 turns");
+
+const dir = mkdtempSync(join(tmpdir(), "ccn-"));
+writeFileSync(join(dir, "b.md"), "You are Noor.\n");
+assert.equal(systemPrompt({ SYSTEM_PROMPT_FILE: join(dir, "b.md"), SYSTEM_PROMPT: "x" }), "You are Noor.");
+assert.equal(systemPrompt({ SYSTEM_PROMPT_FILE: join(dir, "missing.md"), SYSTEM_PROMPT: "x" }), "x");
+assert.match(systemPrompt({}), /Computational Classnotes/);
 
 server.close();
 console.log("selftest ok");

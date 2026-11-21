@@ -112,7 +112,8 @@ function humansIn(room) {
 function addressed(room, text) {
   if (humansIn(room) <= 1) return true; // one-to-one with the construct: always answer
   const t = text.toLowerCase();
-  return t.includes(BOT_USER.toLowerCase()) || t.includes(me.toLowerCase()); // group: answer when addressed
+  const first = DISPLAY_NAME.split(/[\s(]/)[0].toLowerCase(); // e.g. "noor" from "Noor Hoshino"
+  return [BOT_USER, me, first].some((n) => n && t.includes(n.toLowerCase())); // group: answer when addressed
 }
 
 function recentHistory(room) {
