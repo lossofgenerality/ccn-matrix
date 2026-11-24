@@ -47,6 +47,6 @@ This runs the registration flow, the history-to-conversation conversion and the 
 - **Every room topic carries the content licence.**
 
 ---
-*Production: Principal Investigator Lucval · Oversight Directorate Zil · Editors Dara, Lucia, Zil · Software FreeFormer · Agent Kirari-chan (キラリちゃん)*
+*Production: Principal Investigator Lucval · Editors Dara, Lucia · Software FreeFormer · Agent Kirari-chan (キラリちゃん)*
 
 **© Computational Classnotes · CC BY-NC-SA 4.0**

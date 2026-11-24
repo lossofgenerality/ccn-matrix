@@ -51,6 +51,6 @@
 - Claude reached through CCN Cloud, so the API key lives in Wolfram Cloud.
 
 ---
-*Production: Principal Investigator Lucval · Oversight Directorate Zil · Editors Dara, Lucia, Zil · Software FreeFormer · Hikari Noor Hoshino (星野ヌール), AI System Programmer*
+*Production: Principal Investigator Lucval · Editors Dara, Lucia · Software FreeFormer · Hikari Noor Hoshino (星野ヌール), AI System Programming Group*
 
 **© Computational Classnotes · CC BY-NC-SA 4.0**
